@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/AndroidMedia.iml" filepath="$PROJECT_DIR$/AndroidMedia.iml" />
+      <module fileurl="file://$PROJECT_DIR$/videorecorder_library/videorecorder_library.iml" filepath="$PROJECT_DIR$/videorecorder_library/videorecorder_library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/videorecorder_test/videorecorder_test.iml" filepath="$PROJECT_DIR$/videorecorder_test/videorecorder_test.iml" />
+    </modules>
+  </component>
+</project>
+

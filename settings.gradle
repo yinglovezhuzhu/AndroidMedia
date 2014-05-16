@@ -1,0 +1,2 @@
+include ':videorecorder_library', ':videorecorder_test'
+
