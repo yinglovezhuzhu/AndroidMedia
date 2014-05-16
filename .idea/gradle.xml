@@ -8,6 +8,8 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/imageviewer_library" />
+            <option value="$PROJECT_DIR$/imageviewer_test" />
             <option value="$PROJECT_DIR$/videorecorder_library" />
             <option value="$PROJECT_DIR$/videorecorder_test" />
           </set>
