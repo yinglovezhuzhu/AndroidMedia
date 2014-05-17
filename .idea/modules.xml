@@ -3,8 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AndroidMedia.iml" filepath="$PROJECT_DIR$/AndroidMedia.iml" />
-      <module fileurl="file://$PROJECT_DIR$/imageviewer_library/imageviewer_library.iml" filepath="$PROJECT_DIR$/imageviewer_library/imageviewer_library.iml" />
-      <module fileurl="file://$PROJECT_DIR$/imageviewer_test/imageviewer_test.iml" filepath="$PROJECT_DIR$/imageviewer_test/imageviewer_test.iml" />
       <module fileurl="file://$PROJECT_DIR$/videorecorder_library/videorecorder_library.iml" filepath="$PROJECT_DIR$/videorecorder_library/videorecorder_library.iml" />
       <module fileurl="file://$PROJECT_DIR$/videorecorder_test/videorecorder_test.iml" filepath="$PROJECT_DIR$/videorecorder_test/videorecorder_test.iml" />
     </modules>
