@@ -1,2 +1,2 @@
-include ':videorecorder_library', ':videorecorder_test'
+include ':videorecorder_library', ':videorecorder_test', ':videoplayer_libary', ':videoplayer_test'
 
