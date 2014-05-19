@@ -37,7 +37,7 @@ import java.util.TimerTask;
 /**
  * Use：Play Video
  * 
- * @author yinglovezhuzhu@gmail.com
+ * Create by yinglovezhuzhu@gmail.com on
  */
 
 public class Player implements OnBufferingUpdateListener, OnCompletionListener,
