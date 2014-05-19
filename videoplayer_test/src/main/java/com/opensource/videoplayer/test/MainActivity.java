@@ -19,9 +19,11 @@
 package com.opensource.videoplayer.test;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
+
+import com.opensource.videoplayer.PlayerActivity;
 
 public class MainActivity extends Activity {
 
@@ -29,5 +31,16 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        findViewById(R.id.btn_play).setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+//				Intent i = new Intent(MainActivity.this, MyVideoPlay.class);
+//				i.putExtra("netUrl", "http://download.cloud.189.cn/v5/downloadFile.action?downloadRequest=1_79D25A703382CFEA132FE87D2B127C3B01019106D228B136040420F0B46692450A910255CAB91388E859A89B3B9F10BBF985543E2D2BCD84817780930F20F671F581EBB3B67BFBB477C33BD0D039868FF1CEB90C2BA0611116AB3C2F0044FD11DEAFF731C99DDEF71DA7E4B48421941B");
+//				startActivity(i);
+                Intent i = new Intent(MainActivity.this, PlayerActivity.class);
+                startActivity(i);
+            }
+        });
     }
 }

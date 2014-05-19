@@ -31,8 +31,6 @@ import android.view.SurfaceView;
 import android.widget.SeekBar;
 
 import java.io.IOException;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Use：Play Video
@@ -40,7 +38,7 @@ import java.util.TimerTask;
  * Create by yinglovezhuzhu@gmail.com on
  */
 
-public class Player implements OnBufferingUpdateListener, OnCompletionListener,
+public class PlayerManager implements OnBufferingUpdateListener, OnCompletionListener,
 		MediaPlayer.OnPreparedListener, SurfaceHolder.Callback {
 	
 	public MediaPlayer mMediaPlayer;
@@ -49,32 +47,20 @@ public class Player implements OnBufferingUpdateListener, OnCompletionListener,
 	private int mVideoWidth;
 	private int mVideoHeight;
 
-	private Timer mTimer = new Timer();
-
-	public Player(SurfaceView surfaceView, SeekBar skbProgress) {
+	public PlayerManager(SurfaceView surfaceView, SeekBar skbProgress) {
 		this.mSeekBar = skbProgress;
 		mSurfaceHolder = surfaceView.getHolder();
 		mSurfaceHolder.addCallback(this);
 		
 		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+            try {
 			mSurfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 		}
-		mTimer.schedule(mTimerTask, 0, 1000);
 	}
 
-	/*******************************************************
-	 * 通过定时器和Handler来更新进度条
-	 ******************************************************/
-	TimerTask mTimerTask = new TimerTask() {
-		@Override
-		public void run() {
-			if (mMediaPlayer == null)
-				return;
-			if (mMediaPlayer.isPlaying() && mSeekBar.isPressed() == false) {
-				handleProgress.sendEmptyMessage(0);
-			}
-		}
-	};
 
 	Handler handleProgress = new Handler() {
 		public void handleMessage(Message msg) {
@@ -86,6 +72,7 @@ public class Player implements OnBufferingUpdateListener, OnCompletionListener,
 				long pos = mSeekBar.getMax() * position / duration;
 				mSeekBar.setProgress((int) pos);
 			}
+            handleProgress.sendMessageDelayed(handleProgress.obtainMessage(0), 1000);
 		};
 	};
 
@@ -159,6 +146,7 @@ public class Player implements OnBufferingUpdateListener, OnCompletionListener,
 		mVideoHeight = mMediaPlayer.getVideoHeight();
 		if (mVideoHeight != 0 && mVideoWidth != 0) {
 			arg0.start();
+            handleProgress.sendMessageDelayed(handleProgress.obtainMessage(0), 1000);
 		}
 		Log.e("mediaPlayer", "onPrepared");
 	}
@@ -166,7 +154,9 @@ public class Player implements OnBufferingUpdateListener, OnCompletionListener,
 	@Override
 	public void onCompletion(MediaPlayer arg0) {
 		// TODO Auto-generated method stub
-
+        if(mMediaPlayer != null) {
+            mMediaPlayer.release();
+        }
 	}
 
 	@Override
