@@ -23,12 +23,9 @@ import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnBufferingUpdateListener;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Build;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.widget.SeekBar;
 
 import java.io.IOException;
 
@@ -38,48 +35,55 @@ import java.io.IOException;
  * Create by yinglovezhuzhu@gmail.com on
  */
 
-public class PlayerManager implements OnBufferingUpdateListener, OnCompletionListener,
-		MediaPlayer.OnPreparedListener, SurfaceHolder.Callback {
-	
+public class PlayerManager implements SurfaceHolder.Callback {
+        //OnBufferingUpdateListener, OnCompletionListener,
+		//MediaPlayer.OnPreparedListener, SurfaceHolder.Callback {
+
+    public static final int STATE_STOPED = 0x1;
+	public static final int STATE_PLAYING = 0x2;
+    public static final int STATE_PAUSED = 0x3;
+
 	public MediaPlayer mMediaPlayer;
 	private SurfaceHolder mSurfaceHolder;
-	private SeekBar mSeekBar;
-	private int mVideoWidth;
-	private int mVideoHeight;
+//	private SeekBar mSeekBar;
+//    private TextView mTvCurrentTime;
+//    private TextView mTvTotalTime;
+	public int mVideoWidth;
+	public int mVideoHeight;
 
-	public PlayerManager(SurfaceView surfaceView, SeekBar skbProgress) {
-		this.mSeekBar = skbProgress;
-		mSurfaceHolder = surfaceView.getHolder();
-		mSurfaceHolder.addCallback(this);
-		
-		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+    private int mState = STATE_STOPED;
+
+    private OnBufferingUpdateListener mOnBufferingUpdateListener;
+
+    private OnCompletionListener mOnCompletionListener;
+
+    private MediaPlayer.OnPreparedListener mOnPreParedListener;
+
+
+//    public PlayerManager(SurfaceView surfaceView) {
+//        this(surfaceView, null, null, null);
+//    }
+
+    public PlayerManager(SurfaceView surfaceView, OnBufferingUpdateListener bufferingUpdateListener,
+                         OnCompletionListener completionListener, MediaPlayer.OnPreparedListener preparedListener) {
+        this.mOnBufferingUpdateListener = bufferingUpdateListener;
+        this.mOnCompletionListener = completionListener;
+        this.mOnPreParedListener = preparedListener;
+        this.mSurfaceHolder = surfaceView.getHolder();
+        this.mSurfaceHolder.addCallback(this);
+
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
             try {
-			mSurfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+                mSurfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-		}
-	}
-
-
-	Handler handleProgress = new Handler() {
-		public void handleMessage(Message msg) {
-
-			int position = mMediaPlayer.getCurrentPosition();
-			int duration = mMediaPlayer.getDuration();
-
-			if (duration > 0) {
-				long pos = mSeekBar.getMax() * position / duration;
-				mSeekBar.setProgress((int) pos);
-			}
-            handleProgress.sendMessageDelayed(handleProgress.obtainMessage(0), 1000);
-		};
-	};
-
-	// *****************************************************
+        }
+    }
 
 	public void play() {
 		mMediaPlayer.start();
+        mState = STATE_PLAYING;
 	}
 
 	
@@ -87,8 +91,8 @@ public class PlayerManager implements OnBufferingUpdateListener, OnCompletionLis
 		try {
 			mMediaPlayer.reset();
 			mMediaPlayer.setDataSource(videoUrl);
-			mMediaPlayer.prepare();// prepare之后自动播放
-			// mediaPlayer.start();
+			mMediaPlayer.prepare();// auto play when MediaPlayer is prepared
+            mState = STATE_PLAYING;
 		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -103,69 +107,50 @@ public class PlayerManager implements OnBufferingUpdateListener, OnCompletionLis
 
 	public void pause() {
 		mMediaPlayer.pause();
+        mState = STATE_PAUSED;
 	}
 
 	public void stop() {
 		if (mMediaPlayer != null) {
 			mMediaPlayer.stop();
 			mMediaPlayer.release();
-			mMediaPlayer = null;
+            mState = STATE_STOPED;
 		}
 	}
 
-	@Override
-	public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3) {
-		Log.e("mediaPlayer", "surface changed");
-	}
+    @Override
+    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+        Log.e("mediaPlayer", "surface changed");
+    }
 
-	@Override
-	public void surfaceCreated(SurfaceHolder arg0) {
-		try {
-			mMediaPlayer = new MediaPlayer();
-			mMediaPlayer.setDisplay(mSurfaceHolder);
-			mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-			mMediaPlayer.setOnBufferingUpdateListener(this);
-			mMediaPlayer.setOnPreparedListener(this);
-		} catch (Exception e) {
-			Log.e("mediaPlayer", "error", e);
-		}
-		Log.e("mediaPlayer", "surface created");
-	}
-
-	@Override
-	public void surfaceDestroyed(SurfaceHolder arg0) {
-		Log.e("mediaPlayer", "surface destroyed");
-	}
-
-	/**
-	 * 通过onPrepared播放
-	 */
-	@Override
-	public void onPrepared(MediaPlayer arg0) {
-		mVideoWidth = mMediaPlayer.getVideoWidth();
-		mVideoHeight = mMediaPlayer.getVideoHeight();
-		if (mVideoHeight != 0 && mVideoWidth != 0) {
-			arg0.start();
-            handleProgress.sendMessageDelayed(handleProgress.obtainMessage(0), 1000);
-		}
-		Log.e("mediaPlayer", "onPrepared");
-	}
-
-	@Override
-	public void onCompletion(MediaPlayer arg0) {
-		// TODO Auto-generated method stub
-        if(mMediaPlayer != null) {
-            mMediaPlayer.release();
+    @Override
+    public void surfaceCreated(SurfaceHolder holder) {
+        try {
+            mMediaPlayer = new MediaPlayer();
+            mMediaPlayer.setDisplay(mSurfaceHolder);
+            mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+            mMediaPlayer.setOnBufferingUpdateListener(mOnBufferingUpdateListener);
+            mMediaPlayer.setOnPreparedListener(mOnPreParedListener);
+            mMediaPlayer.setOnCompletionListener(mOnCompletionListener);
+        } catch (Exception e) {
+            Log.e("mediaPlayer", "error", e);
         }
-	}
+        Log.e("mediaPlayer", "surface created");
+    }
 
-	@Override
-	public void onBufferingUpdate(MediaPlayer arg0, int bufferingProgress) {
-		mSeekBar.setSecondaryProgress(bufferingProgress);
-		int currentProgress = mSeekBar.getMax()
-				* mMediaPlayer.getCurrentPosition() / mMediaPlayer.getDuration();
-		Log.e(currentProgress + "% play", bufferingProgress + "% buffer");
+    @Override
+    public void surfaceDestroyed(SurfaceHolder holder) {
+        Log.e("mediaPlayer", "surface destroyed");
+    }
 
-	}
+    public boolean isPlaying() {
+        if(mMediaPlayer == null) {
+            return false;
+        }
+        return mMediaPlayer.isPlaying();
+    }
 
+    public int getState() {
+        return mState;
+    }
 }

@@ -18,41 +18,50 @@
   -->
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_height="fill_parent"
-    android:layout_width="fill_parent">
+	android:layout_height="match_parent"
+    android:layout_width="match_parent">
 	<SurfaceView android:id="@+id/sv_video_player"
-		android:layout_height="fill_parent"
-        android:layout_width="fill_parent"
+		android:layout_height="match_parent"
+        android:layout_width="match_parent"
         android:keepScreenOn="true"/>
 	<LinearLayout
         android:layout_height="wrap_content"
-		android:layout_width="fill_parent"
+		android:layout_width="match_parent"
         android:layout_gravity="bottom"
 		android:orientation="vertical">
 		<LinearLayout android:orientation="horizontal"
-			android:layout_gravity="center_horizontal" android:layout_marginTop="4.0dip"
-			android:layout_height="wrap_content" android:layout_width="wrap_content">
-			<Button
+			android:layout_gravity="center_horizontal"
+            android:layout_marginTop="4.0dip"
+			android:layout_height="wrap_content"
+            android:layout_width="wrap_content">
+			<ImageButton
+                android:id="@+id/ibtn_video_player_rew"
                 android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-                android:id="@+id/btnPlayUrl"
-				android:text="播放网络视频"/>
-			<Button
+                android:src="@drawable/ic_media_rew"/>
+			<ImageButton
+                android:id="@+id/ibtn_video_player_play_and_pause"
                 android:layout_height="wrap_content"
-                android:id="@+id/btnPause"
-				android:text="暂停"
-                android:layout_width="80dip"/>
-			<Button
+                android:layout_width="wrap_content"
+                android:src="@drawable/ic_media_play"/>
+			<ImageButton
+                android:id="@+id/ibtn_video_player_ff"
                 android:layout_height="wrap_content"
-				android:layout_width="80dip"
-                android:text="停止"
-                android:id="@+id/btnStop"/>
+				android:layout_width="wrap_content"
+                android:src="@drawable/ic_media_ff"/>
 		</LinearLayout>
 		<LinearLayout
             android:orientation="horizontal"
 			android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-			android:layout_marginBottom="20dip">
+			android:layout_marginBottom="20dip"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/tv_video_player_time_current"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="14:00"/>
 			<SeekBar
 				android:id="@+id/sb_video_player"
                 android:layout_width="0dp"
@@ -61,7 +70,14 @@
 				android:paddingLeft="10dip"
                 android:paddingRight="10dip"
                 android:layout_gravity="center_vertical"
-                android:max="100"/>
+                android:max="100"
+                android:indeterminate="false" />
+            <TextView
+                android:id="@+id/tv_video_player_time_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="53:22"/>
 		</LinearLayout>
 	</LinearLayout>
 </FrameLayout>
