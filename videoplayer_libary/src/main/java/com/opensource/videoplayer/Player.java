@@ -1,0 +1,183 @@
+/*
+ * Copyright (C) 2014年3月6日 上午10:39:16 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * Auther：yinglovezhuzhu@gmail.com
+ * FileName:ReadVideoResp.java
+ * Date：2014年3月6日
+ * Version：v1.0
+ */
+package com.opensource.videoplayer;
+
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnBufferingUpdateListener;
+import android.media.MediaPlayer.OnCompletionListener;
+import android.os.Build;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
+import android.widget.SeekBar;
+
+import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
+
+/**
+ * Use：Play Video
+ * 
+ * @author yinglovezhuzhu@gmail.com
+ */
+
+public class Player implements OnBufferingUpdateListener, OnCompletionListener,
+		MediaPlayer.OnPreparedListener, SurfaceHolder.Callback {
+	
+	public MediaPlayer mMediaPlayer;
+	private SurfaceHolder mSurfaceHolder;
+	private SeekBar mSeekBar;
+	private int mVideoWidth;
+	private int mVideoHeight;
+
+	private Timer mTimer = new Timer();
+
+	public Player(SurfaceView surfaceView, SeekBar skbProgress) {
+		this.mSeekBar = skbProgress;
+		mSurfaceHolder = surfaceView.getHolder();
+		mSurfaceHolder.addCallback(this);
+		
+		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+			mSurfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+		}
+		mTimer.schedule(mTimerTask, 0, 1000);
+	}
+
+	/*******************************************************
+	 * 通过定时器和Handler来更新进度条
+	 ******************************************************/
+	TimerTask mTimerTask = new TimerTask() {
+		@Override
+		public void run() {
+			if (mMediaPlayer == null)
+				return;
+			if (mMediaPlayer.isPlaying() && mSeekBar.isPressed() == false) {
+				handleProgress.sendEmptyMessage(0);
+			}
+		}
+	};
+
+	Handler handleProgress = new Handler() {
+		public void handleMessage(Message msg) {
+
+			int position = mMediaPlayer.getCurrentPosition();
+			int duration = mMediaPlayer.getDuration();
+
+			if (duration > 0) {
+				long pos = mSeekBar.getMax() * position / duration;
+				mSeekBar.setProgress((int) pos);
+			}
+		};
+	};
+
+	// *****************************************************
+
+	public void play() {
+		mMediaPlayer.start();
+	}
+
+	
+	public void playUrl(String videoUrl) {
+		try {
+			mMediaPlayer.reset();
+			mMediaPlayer.setDataSource(videoUrl);
+			mMediaPlayer.prepare();// prepare之后自动播放
+			// mediaPlayer.start();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void pause() {
+		mMediaPlayer.pause();
+	}
+
+	public void stop() {
+		if (mMediaPlayer != null) {
+			mMediaPlayer.stop();
+			mMediaPlayer.release();
+			mMediaPlayer = null;
+		}
+	}
+
+	@Override
+	public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3) {
+		Log.e("mediaPlayer", "surface changed");
+	}
+
+	@Override
+	public void surfaceCreated(SurfaceHolder arg0) {
+		try {
+			mMediaPlayer = new MediaPlayer();
+			mMediaPlayer.setDisplay(mSurfaceHolder);
+			mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+			mMediaPlayer.setOnBufferingUpdateListener(this);
+			mMediaPlayer.setOnPreparedListener(this);
+		} catch (Exception e) {
+			Log.e("mediaPlayer", "error", e);
+		}
+		Log.e("mediaPlayer", "surface created");
+	}
+
+	@Override
+	public void surfaceDestroyed(SurfaceHolder arg0) {
+		Log.e("mediaPlayer", "surface destroyed");
+	}
+
+	/**
+	 * 通过onPrepared播放
+	 */
+	@Override
+	public void onPrepared(MediaPlayer arg0) {
+		mVideoWidth = mMediaPlayer.getVideoWidth();
+		mVideoHeight = mMediaPlayer.getVideoHeight();
+		if (mVideoHeight != 0 && mVideoWidth != 0) {
+			arg0.start();
+		}
+		Log.e("mediaPlayer", "onPrepared");
+	}
+
+	@Override
+	public void onCompletion(MediaPlayer arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onBufferingUpdate(MediaPlayer arg0, int bufferingProgress) {
+		mSeekBar.setSecondaryProgress(bufferingProgress);
+		int currentProgress = mSeekBar.getMax()
+				* mMediaPlayer.getCurrentPosition() / mMediaPlayer.getDuration();
+		Log.e(currentProgress + "% play", bufferingProgress + "% buffer");
+
+	}
+
+}
