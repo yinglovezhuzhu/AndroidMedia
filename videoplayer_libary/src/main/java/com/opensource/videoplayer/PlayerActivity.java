@@ -19,12 +19,14 @@
 package com.opensource.videoplayer;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -180,10 +182,24 @@ public class PlayerActivity extends Activity implements OnClickListener{
         }
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(KeyEvent.KEYCODE_BACK == keyCode) {
+            exit(RESULT_OK, null);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
     private void pause() {
         mPlayerManager.pause();
         mIbtnPlayAndPause.setImageResource(R.drawable.ic_media_play);
 
+    }
+
+    private void exit(int resultCode, Intent data) {
+        setResult(resultCode, data);
+        finish();
     }
 
 	class SeekBarChangeEvent implements SeekBar.OnSeekBarChangeListener {

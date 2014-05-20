@@ -42,6 +42,7 @@ public class PlayerManager implements SurfaceHolder.Callback {
     public static final int STATE_STOPED = 0x1;
 	public static final int STATE_PLAYING = 0x2;
     public static final int STATE_PAUSED = 0x3;
+    public static final int STATE_PREPARING = 0x4;
 
 	public MediaPlayer mMediaPlayer;
 	private SurfaceHolder mSurfaceHolder;
@@ -91,8 +92,10 @@ public class PlayerManager implements SurfaceHolder.Callback {
 		try {
 			mMediaPlayer.reset();
 			mMediaPlayer.setDataSource(videoUrl);
-			mMediaPlayer.prepare();// auto play when MediaPlayer is prepared
+//			mMediaPlayer.prepare();// auto play when MediaPlayer is prepared
+            mMediaPlayer.prepareAsync();
             mState = STATE_PLAYING;
+
 		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
