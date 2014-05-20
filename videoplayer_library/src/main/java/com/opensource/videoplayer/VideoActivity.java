@@ -33,22 +33,22 @@ import com.opensource.videoplayer.app.Res;
 /**
  * This activity plays a video from a specified URI.
  */
-public class MovieActivity extends Activity {
+public class VideoActivity extends Activity {
     @SuppressWarnings("unused")
     private static final String TAG = "MovieView";
 
     private MovieApp mMovieApp = null;
-    private MoviePlayer mControl;
+    private VideoPlayer mControl;
     private boolean mFinishOnCompletion;
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        mMovieApp = new MovieApp(MovieActivity.this);
+        mMovieApp = new MovieApp(VideoActivity.this);
         setContentView(Res.layout.movie_view);
         View rootView = findViewById(Res.id.root);
         Intent intent = getIntent();
-        mControl = new MoviePlayer(rootView, this, intent.getData()) {
+        mControl = new VideoPlayer(rootView, this, intent.getData()) {
             @Override
             public void onCompletion() {
                 if (mFinishOnCompletion) {

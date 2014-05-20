@@ -6,7 +6,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
-import com.opensource.videoplayer.MovieActivity;
+import com.opensource.movieplayer.test.R;
+import com.opensource.videoplayer.VideoActivity;
 
 public class MainActivity extends Activity {
 
@@ -18,8 +19,9 @@ public class MainActivity extends Activity {
         findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, MovieActivity.class);
-                i.setData(Uri.parse("http://192.168.1.121/family_guy_penis_car.3gp"));
+                Intent i = new Intent(MainActivity.this, VideoActivity.class);
+//                i.setData(Uri.parse("http://192.168.1.121/family_guy_penis_car.3gp"));
+                i.setData(Uri.parse("/storage/extSdCard/DCIM/Camera/VID_20140502_085802.mp4"));
                 startActivity(i);
             }
         });

@@ -38,7 +38,7 @@ import android.widget.VideoView;
 
 import com.opensource.videoplayer.app.Res;
 
-public class MoviePlayer implements MediaPlayer.OnErrorListener, MediaPlayer.OnCompletionListener {
+public class VideoPlayer implements MediaPlayer.OnErrorListener, MediaPlayer.OnCompletionListener {
 
     @SuppressWarnings("unused")
     private static final String TAG = "MovieViewControl";
@@ -77,7 +77,7 @@ public class MoviePlayer implements MediaPlayer.OnErrorListener, MediaPlayer.OnC
         return durationValue;
     }
 
-    public MoviePlayer(View rootView, Context context, Uri videoUri) {
+    public VideoPlayer(View rootView, Context context, Uri videoUri) {
         mContentResolver = context.getContentResolver();
         mVideoView = (VideoView) rootView.findViewById(Res.id.surface_view);
         mProgressView = rootView.findViewById(Res.id.progress_indicator);
