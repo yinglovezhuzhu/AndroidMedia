@@ -27,9 +27,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.opensource.videoplayer.app.MovieApp;
-import com.opensource.videoplayer.app.Res;
-
 /**
  * This activity plays a video from a specified URI.
  */
@@ -37,18 +34,16 @@ public class VideoActivity extends Activity {
     @SuppressWarnings("unused")
     private static final String TAG = "MovieView";
 
-    private MovieApp mMovieApp = null;
-    private VideoPlayer mControl;
+    private VideoPlayer mVideoPlayer;
     private boolean mFinishOnCompletion;
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        mMovieApp = new MovieApp(VideoActivity.this);
-        setContentView(Res.layout.movie_view);
-        View rootView = findViewById(Res.id.root);
+        setContentView(R.layout.activity_video_player);
+        View rootView = findViewById(R.id.view_video_player_root);
         Intent intent = getIntent();
-        mControl = new VideoPlayer(rootView, this, intent.getData()) {
+        mVideoPlayer = new VideoPlayer(rootView, this, intent.getData()) {
             @Override
             public void onCompletion() {
                 if (mFinishOnCompletion) {
@@ -56,6 +51,7 @@ public class VideoActivity extends Activity {
                 }
             }
         };
+
         if (intent.hasExtra(MediaStore.EXTRA_SCREEN_ORIENTATION)) {
             int orientation = intent.getIntExtra(MediaStore.EXTRA_SCREEN_ORIENTATION, ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
             //noinspection ResourceType
@@ -65,30 +61,27 @@ public class VideoActivity extends Activity {
             }
         }
         mFinishOnCompletion = intent.getBooleanExtra(MediaStore.EXTRA_FINISH_ON_COMPLETION, true);
-        Window win = getWindow();
-        WindowManager.LayoutParams winParams = win.getAttributes();
+        Window window = getWindow();
+        WindowManager.LayoutParams winParams = window.getAttributes();
         winParams.buttonBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_OFF;
-        win.setAttributes(winParams);
+        window.setAttributes(winParams);
     }
 
     @Override
     public void onPause() {
-        mControl.onPause();
+        mVideoPlayer.onPause();
         super.onPause();
-    	mMovieApp.onPause();
     }
 
     @Override
     public void onResume() {
-        mControl.onResume();
+        mVideoPlayer.onResume();
         super.onResume();
-    	mMovieApp.onResume();
     }
     
     @Override
     public void onDestroy() {
-        mControl.onDestroy();
-    	mMovieApp.shutdown();
+        mVideoPlayer.onDestroy();
     	super.onDestroy();
     }
 }
