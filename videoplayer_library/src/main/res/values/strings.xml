@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">MoviePlayer_Library</string>
+
+    <!-- shown in the video player view while the video is being loaded, before it starts playing -->
+    <string name="loading_video">Loading video\u2026</string>
+
+    <!-- Used to format short video duration in Details dialog. minutes:seconds e.g. 00:30 -->
+    <string name="details_ms">%1$02d:%2$02d</string>
+    <!-- Used to format video duration in Details dialog. hours:minutes:seconds e.g. 0:21:30 -->
+    <string name="details_hms">%1$d:%2$02d:%3$02d</string>
+
+    <!-- Movie View Resume Playing dialog title -->
+    <string name="resume_playing_title">Resume video</string>
+
+    <!-- Movie View Start Playing dialog title -->
+    <string name="resume_playing_message">Resume playing from %s ?</string>
+    <!-- Movie View Start Playing button "Resume from bookmark" -->
+    <string name="resume_playing_resume">Resume playing</string>
+
+    <!-- Movie View Start Playing button "Beginning" -->
+    <string name="resume_playing_restart">Start over</string>
+</resources>

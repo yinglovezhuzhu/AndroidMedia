@@ -8,7 +8,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/videoplayer_libary" />
+            <option value="$PROJECT_DIR$/videoplayer_library" />
             <option value="$PROJECT_DIR$/videoplayer_test" />
             <option value="$PROJECT_DIR$/videorecorder_library" />
             <option value="$PROJECT_DIR$/videorecorder_test" />

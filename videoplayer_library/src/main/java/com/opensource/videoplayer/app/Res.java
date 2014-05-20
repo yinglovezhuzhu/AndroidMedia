@@ -16,27 +16,14 @@
  * limitations under the License.
  */
 
-apply plugin: 'android-library'
+package com.opensource.videoplayer.app;
 
-android {
-    compileSdkVersion 19
-    buildToolsVersion "19.0.3"
+import com.opensource.videoplayer.R;
 
-    defaultConfig {
-        minSdkVersion 7
-        targetSdkVersion 19
-        versionCode 1
-        versionName "1.0"
-    }
-    buildTypes {
-        release {
-            runProguard false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
-        }
-    }
-}
-
-dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:19.+'
+public class Res {
+    public static final R.attr attr = new R.attr();
+    public static final R.drawable drawable = new R.drawable();
+    public static final R.id id = new R.id();
+    public static final R.layout layout = new R.layout();
+    public static final R.string string = new R.string();
 }
