@@ -18,5 +18,5 @@
 
 
 
-include 'OpenCamera_Library', 'OpenCamera_Test', 'VideoPlayer_Library', 'VideoPlayer_Test'
+include 'OpenCamera', 'VideoPlayer_Library', 'VideoPlayer_Test'
 
