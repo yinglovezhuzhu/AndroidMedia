@@ -116,6 +116,10 @@ public class ListPreference extends CameraPreference {
         this.mLoaded = false;
     }
 
+    /**
+     * To filter unsupported setting values.
+     * @param supported
+     */
     public void filterUnsupported(List<String> supported) {
         ArrayList<CharSequence> entries = new ArrayList<CharSequence>();
         ArrayList<CharSequence> entryValues = new ArrayList<CharSequence>();
