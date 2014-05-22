@@ -18,7 +18,7 @@
   -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.opensource.videorecorder.test" >
+    package="com.opensource.opencamera.test" >
 
     <application
         android:allowBackup="true"
@@ -26,7 +26,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.opensource.videorecorder.test.MainActivity"
+            android:name="com.opensource.opencamera.test.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

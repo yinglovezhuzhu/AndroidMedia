@@ -24,7 +24,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
-import com.opensource.movieplayer.test.R;
 import com.opensource.videoplayer.VideoActivity;
 
 public class MainActivity extends Activity {

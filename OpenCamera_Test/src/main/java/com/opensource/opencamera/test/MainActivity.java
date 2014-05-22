@@ -16,12 +16,10 @@
  * limitations under the License.
  */
 
-package com.opensource.videorecorder.test;
+package com.opensource.opencamera.test;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 
 public class MainActivity extends Activity {
 

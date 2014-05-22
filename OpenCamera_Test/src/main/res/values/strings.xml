@@ -19,7 +19,7 @@
 
 <resources>
 
-    <string name="app_name">videorecorder_test</string>
+    <string name="app_name">OpenCamera_Test</string>
     <string name="hello_world">Hello world!</string>
 
 </resources>
