@@ -1428,6 +1428,9 @@ public class VideoCamera extends NoSearchActivity
         list.close();
     }
 
+    /**
+     * Update the time show in record view.
+     */
     private void updateRecordingTime() {
         if (!mMediaRecorderRecording) {
             return;
@@ -1488,10 +1491,19 @@ public class VideoCamera extends NoSearchActivity
                 UPDATE_RECORD_TIME, next_update_delay);
     }
 
+    /**
+     * Whether the setting value is supported.
+     * @param value setting value.
+     * @param supported the camera supported values.
+     * @return
+     */
     private static boolean isSupported(String value, List<String> supported) {
         return supported == null ? false : supported.indexOf(value) >= 0;
     }
 
+    /**
+     * Set camera setting parameters.
+     */
     private void setCameraParameters() {
         mParameters = mCameraDevice.getParameters();
 
