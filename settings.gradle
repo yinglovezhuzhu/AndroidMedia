@@ -18,5 +18,5 @@
 
 
 
-include ':videorecorder_library', ':videorecorder_test', ':videoplayer_library', ':videoplayer_test'
+include 'OpenCamera_Library', 'OpenCamera_Test', 'VideoPlayer_Library', 'VideoPlayer_Test'
 

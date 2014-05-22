@@ -8,10 +8,10 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/videoplayer_library" />
-            <option value="$PROJECT_DIR$/videoplayer_test" />
-            <option value="$PROJECT_DIR$/videorecorder_library" />
-            <option value="$PROJECT_DIR$/videorecorder_test" />
+            <option value="$PROJECT_DIR$/OpenCamera_Library" />
+            <option value="$PROJECT_DIR$/OpenCamera_Test" />
+            <option value="$PROJECT_DIR$/VideoPlayer_Library" />
+            <option value="$PROJECT_DIR$/VideoPlayer_Test" />
           </set>
         </option>
       </GradleProjectSettings>
