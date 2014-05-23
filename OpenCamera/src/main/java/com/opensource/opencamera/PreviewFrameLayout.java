@@ -30,6 +30,7 @@ import android.widget.FrameLayout;
  * the gripper.
  */
 public class PreviewFrameLayout extends ViewGroup {
+
     private static final int MIN_HORIZONTAL_MARGIN = 10; // 10dp
 
     /** A callback to be invoked when the preview frame's size changes. */

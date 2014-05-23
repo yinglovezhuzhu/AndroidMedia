@@ -72,8 +72,8 @@ public class MenuHelper {
     public static final int RESULT_COMMON_MENU_CROP = 490;
 
     private static final int NO_ANIMATION = 0;
-    private static final String CAMERA_CLASS = "com.android.camera.Camera";
-    private static final String VIDEO_CAMERA_CLASS = "com.android.camera.VideoCamera";
+    private static final String CAMERA_CLASS = "com.opensource.opencamera.Camera";
+    private static final String VIDEO_CAMERA_CLASS = "com.opensource.opencamera.VideoCamera";
 
     public static void closeSilently(Closeable c) {
         if (c != null) {

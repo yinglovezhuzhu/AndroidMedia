@@ -1090,21 +1090,21 @@ public class Camera extends NoSearchActivity implements View.OnClickListener,
 
     public void onClick(View v) {
         switch (v.getId()) {
-//            case R.id.btn_retake:
-//                hidePostCaptureAlert();
-//                restartPreview();
-//                break;
-//            case R.id.review_thumbnail:
-//                if (isCameraIdle()) {
-//                    viewLastImage();
-//                }
-//                break;
-//            case R.id.btn_done:
-//                doAttach();
-//                break;
-//            case R.id.btn_cancel:
-//                doCancel();
-//                break;
+            case R.id.btn_retake:
+                hidePostCaptureAlert();
+                restartPreview();
+                break;
+            case R.id.review_thumbnail:
+                if (isCameraIdle()) {
+                    viewLastImage();
+                }
+                break;
+            case R.id.btn_done:
+                doAttach();
+                break;
+            case R.id.btn_cancel:
+                doCancel();
+                break;
         }
     }
 
@@ -1219,9 +1219,9 @@ public class Camera extends NoSearchActivity implements View.OnClickListener,
             return;
         }
         switch (button.getId()) {
-//            case R.id.shutter_button:
-//                doSnap();
-//                break;
+            case R.id.shutter_button:
+                doSnap();
+                break;
         }
     }
 
