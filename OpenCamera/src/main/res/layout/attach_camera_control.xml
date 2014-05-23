@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2014 The Android Open Source Project.
   ~
   ~        yinglovezhuzhu@gmail.com
@@ -18,64 +17,91 @@
   -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:camera="http://schemas.android.com/apk/res/com.opensource.opencamera"
-        android:id="@+id/control_bar"
-        android:layout_height="match_parent"
-        android:layout_width="76dp"
-        android:layout_marginTop="13dp"
-        android:layout_marginBottom="10dp"
-        android:layout_alignParentRight="true">
-    <LinearLayout android:orientation="vertical"
-            android:gravity="top|center_horizontal"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent">
-        <LinearLayout style="@style/ReviewControlGroup"
-                android:layout_marginBottom="15dp">
-            <ImageView style="@style/ReviewControlIcon"
-                    android:id="@+id/btn_cancel"
-                    android:src="@drawable/btn_ic_review_cancel"/>
-            <TextView style="@style/ReviewControlText"
-                    android:text="@string/review_cancel" />
+    android:id="@+id/control_bar"
+    android:layout_width="76dp"
+    android:layout_height="match_parent"
+    android:layout_alignParentRight="true"
+    android:layout_marginBottom="10dp"
+    android:layout_marginTop="13dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="top|center_horizontal"
+        android:orientation="vertical">
+
+        <LinearLayout
+            style="@style/ReviewControlGroup"
+            android:layout_marginBottom="15dp">
+
+            <ImageView
+                android:id="@+id/btn_cancel"
+                style="@style/ReviewControlIcon"
+                android:src="@drawable/btn_ic_review_cancel" />
+
+            <TextView
+                style="@style/ReviewControlText"
+                android:text="@string/review_cancel" />
         </LinearLayout>
-        <LinearLayout style="@style/ReviewControlGroup"
-                android:visibility="gone"
-                android:layout_marginBottom="15dp">
-            <ImageView style="@style/ReviewControlIcon"
-                    android:id="@+id/btn_retake"
-                    android:src="@drawable/btn_ic_review_retake_photo"/>
-            <TextView style="@style/ReviewControlText"
-                    android:text="@string/review_retake" />
+
+        <LinearLayout
+            style="@style/ReviewControlGroup"
+            android:layout_marginBottom="15dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/btn_retake"
+                style="@style/ReviewControlIcon"
+                android:src="@drawable/btn_ic_review_retake_photo" />
+
+            <TextView
+                style="@style/ReviewControlText"
+                android:text="@string/review_retake" />
         </LinearLayout>
-        <LinearLayout style="@style/ReviewControlGroup"
-                android:visibility="gone"
-                android:layout_marginBottom="15dp">
-            <ImageView style="@style/ReviewControlIcon"
-                    android:id="@+id/btn_play"
-                    android:src="@drawable/btn_ic_review_play"/>
-            <TextView style="@style/ReviewControlText"
-                    android:text="@string/review_play" />
+
+        <LinearLayout
+            style="@style/ReviewControlGroup"
+            android:layout_marginBottom="15dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/btn_play"
+                style="@style/ReviewControlIcon"
+                android:src="@drawable/btn_ic_review_play" />
+
+            <TextView
+                style="@style/ReviewControlText"
+                android:text="@string/review_play" />
         </LinearLayout>
     </LinearLayout>
-    <com.opensource.opencamera.ShutterButton android:id="@+id/shutter_button"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:scaleType="center"
-            android:clickable="true"
-            android:focusable="true"
-            android:src="@drawable/btn_ic_camera_shutter"
-            android:background="@drawable/btn_shutter"/>
-    <LinearLayout style="@style/ReviewControlGroup"
-            android:visibility="invisible"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true">
-        <ImageView style="@style/ReviewControlIcon"
-                android:id="@+id/btn_done"
-                android:src="@drawable/btn_ic_review_done"/>
-        <TextView style="@style/ReviewControlText"
-                android:text="@string/review_ok" />
+
+    <com.opensource.opencamera.ShutterButton
+        android:id="@+id/shutter_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/btn_shutter"
+        android:clickable="true"
+        android:focusable="true"
+        android:scaleType="center"
+        android:src="@drawable/btn_ic_camera_shutter" />
+
+    <LinearLayout
+        style="@style/ReviewControlGroup"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible">
+
+        <ImageView
+            android:id="@+id/btn_done"
+            style="@style/ReviewControlIcon"
+            android:src="@drawable/btn_ic_review_done" />
+
+        <TextView
+            style="@style/ReviewControlText"
+            android:text="@string/review_ok" />
     </LinearLayout>
 </RelativeLayout>
