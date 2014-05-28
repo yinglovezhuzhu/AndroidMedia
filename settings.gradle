@@ -18,7 +18,5 @@
 
 
 
-
-
 include ':OpenCamera', ':VideoPlayer_Library', ':VideoPlayer_Test'
 
