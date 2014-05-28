@@ -16,7 +16,19 @@
  * limitations under the License.
  */
 
+package com.opensource.openvideo;
 
+import android.app.Activity;
 
-include ':OpenCamera', ':VideoPlayer_Library', ':VideoPlayer_Test', ':OpenVideo_Library', ':OpenVideo_Test'
-
+/**
+ * An activity which disables the search key function.
+ *
+ * <p> To use it, just inherit from {@code NoSearchActivity} instead of
+ * {@code Activity}.
+ */
+public class NoSearchActivity extends Activity {
+    @Override
+    public boolean onSearchRequested() {
+        return false;
+    }
+}

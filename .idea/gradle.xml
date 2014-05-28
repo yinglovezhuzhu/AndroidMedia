@@ -9,6 +9,8 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/OpenCamera" />
+            <option value="$PROJECT_DIR$/OpenVideo_Library" />
+            <option value="$PROJECT_DIR$/OpenVideo_Test" />
             <option value="$PROJECT_DIR$/VideoPlayer_Library" />
             <option value="$PROJECT_DIR$/VideoPlayer_Test" />
           </set>

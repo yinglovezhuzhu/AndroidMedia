@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AndroidMedia.iml" filepath="$PROJECT_DIR$/AndroidMedia.iml" />
       <module fileurl="file://$PROJECT_DIR$/OpenCamera/OpenCamera.iml" filepath="$PROJECT_DIR$/OpenCamera/OpenCamera.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OpenVideo_Library/OpenVideo_Library.iml" filepath="$PROJECT_DIR$/OpenVideo_Library/OpenVideo_Library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OpenVideo_Test/OpenVideo_Test.iml" filepath="$PROJECT_DIR$/OpenVideo_Test/OpenVideo_Test.iml" />
       <module fileurl="file://$PROJECT_DIR$/VideoPlayer_Library/VideoPlayer_Library.iml" filepath="$PROJECT_DIR$/VideoPlayer_Library/VideoPlayer_Library.iml" />
       <module fileurl="file://$PROJECT_DIR$/VideoPlayer_Test/VideoPlayer_Test.iml" filepath="$PROJECT_DIR$/VideoPlayer_Test/VideoPlayer_Test.iml" />
     </modules>

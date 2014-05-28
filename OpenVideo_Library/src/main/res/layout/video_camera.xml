@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2014 The Android Open Source Project.
   ~
   ~        yinglovezhuzhu@gmail.com
@@ -21,10 +20,9 @@
     android:id="@+id/video_camera"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/camera_background"
     android:orientation="horizontal">
 
-    <com.opensource.opencamera.PreviewFrameLayout
+    <com.opensource.openvideo.PreviewFrameLayout
         android:id="@+id/frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -34,8 +32,7 @@
         <FrameLayout
             android:id="@+id/frame"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/border_view_finder">
+            android:layout_height="match_parent">
 
             <SurfaceView
                 android:id="@+id/camera_preview"
@@ -48,7 +45,7 @@
                 android:layout_height="match_parent"
                 android:visibility="gone" />
 
-            <com.opensource.opencamera.ui.RotateRecordingTime
+            <com.opensource.openvideo.widget.RotateRecordingTime
                 android:id="@+id/recording_time_rect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -75,7 +72,7 @@
                     android:textSize="23dp"
                     android:textStyle="bold"
                     android:visibility="gone" />
-            </com.opensource.opencamera.ui.RotateRecordingTime>
+            </com.opensource.openvideo.widget.RotateRecordingTime>
         </FrameLayout>
-    </com.opensource.opencamera.PreviewFrameLayout>
+    </com.opensource.openvideo.PreviewFrameLayout>
 </LinearLayout>
