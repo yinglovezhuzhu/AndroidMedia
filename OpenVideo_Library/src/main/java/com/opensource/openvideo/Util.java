@@ -29,6 +29,8 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 
+import java.io.Closeable;
+
 //import com.opensource.opencamera.gallery.IImage;
 
 /**
@@ -155,7 +157,7 @@ public class Util {
             }
         }
         return -1;
-    }
+    }*/
 
     public static void closeSilently(Closeable c) {
         if (c == null) return;
@@ -166,7 +168,7 @@ public class Util {
         }
     }
 
-    public static Bitmap makeBitmap(byte[] jpegData, int maxNumOfPixels) {
+    /*public static Bitmap makeBitmap(byte[] jpegData, int maxNumOfPixels) {
         try {
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inJustDecodeBounds = true;

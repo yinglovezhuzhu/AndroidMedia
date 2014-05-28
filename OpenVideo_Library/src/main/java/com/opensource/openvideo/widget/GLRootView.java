@@ -33,7 +33,7 @@ import android.view.MotionEvent;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 
-import com.opensource.opencamera.Util;
+import com.opensource.openvideo.Util;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -107,7 +107,7 @@ public class GLRootView extends GLSurfaceView
     private int mFlags = FLAG_NEED_LAYOUT;
     private long mAnimationTime;
 
-    private CameraEGLConfigChooser mEglConfigChooser = new CameraEGLConfigChooser();
+//    private CameraEGLConfigChooser mEglConfigChooser = new CameraEGLConfigChooser();
 
     public GLRootView(Context context) {
         this(context, null);
@@ -174,9 +174,9 @@ public class GLRootView extends GLSurfaceView
         freeTransformation(trans);
     }
 
-    public CameraEGLConfigChooser getEGLConfigChooser() {
+    /*public CameraEGLConfigChooser getEGLConfigChooser() {
         return mEglConfigChooser;
-    }
+    }*/
 
     private static ByteBuffer allocateDirectNativeOrderBuffer(int size) {
         return ByteBuffer.allocateDirect(size).order(ByteOrder.nativeOrder());
@@ -184,7 +184,7 @@ public class GLRootView extends GLSurfaceView
 
     private void initialize() {
         mFlags |= FLAG_INITIALIZED;
-        setEGLConfigChooser(mEglConfigChooser);
+//        setEGLConfigChooser(mEglConfigChooser);
         getHolder().setFormat(PixelFormat.TRANSLUCENT);
         setZOrderOnTop(true);
 
@@ -348,7 +348,7 @@ public class GLRootView extends GLSurfaceView
         gl.glPopMatrix();
     }
 
-    public void drawNinePatch(
+    /*public void drawNinePatch(
             NinePatchTexture tex, int x, int y, int width, int height) {
 
         NinePatchChunk chunk = tex.getNinePatchChunk();
@@ -381,7 +381,7 @@ public class GLRootView extends GLSurfaceView
         gl.glTranslatef(x, y, 0);
         drawMesh(divX, divY, divU, divV, nx, ny);
         gl.glPopMatrix();
-    }
+    }*/
 
     /**
      * Stretches the texture according to the nine-patch rules. It will
@@ -583,12 +583,12 @@ public class GLRootView extends GLSurfaceView
         drawRect(x, y, width, height);
     }
 
-    public void drawTexture(
+    /*public void drawTexture(
             BasicTexture texture, int x, int y, int width, int height) {
         drawTexture(texture, x, y, width, height, mTransformation.getAlpha());
-    }
+    }*/
 
-    public void drawTexture(BasicTexture texture,
+    /*public void drawTexture(BasicTexture texture,
             int x, int y, int width, int height, float alpha) {
 
         if (!mTexture2DEnabled) {
@@ -625,7 +625,7 @@ public class GLRootView extends GLSurfaceView
                 ((GL11Ext) mGL).glDrawTexiOES(x, y, 0, width, height);
             }
         }
-    }
+    }*/
 
     private static boolean isMatrixRotatedOrFlipped(float matrix[]) {
         return matrix[Matrix.MSKEW_X] != 0 || matrix[Matrix.MSKEW_Y] != 0
@@ -680,7 +680,7 @@ public class GLRootView extends GLSurfaceView
         return mDisplayMetrics;
     }
 
-    public void copyTexture2D(
+    /*public void copyTexture2D(
             RawTexture texture, int x, int y, int width, int height)
             throws GLOutOfMemoryException {
         Matrix matrix = mTransformation.getMatrix();
@@ -728,6 +728,6 @@ public class GLRootView extends GLSurfaceView
 
         texture.setSize(width, height);
         texture.setTextureSize(newWidth, newHeight);
-    }
+    }*/
 
 }
