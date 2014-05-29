@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">OpenVideo_Test</string>
-    <string name="hello_world">Hello world!</string>
+
+    <string name="video">Video</string>
 
 </resources>
