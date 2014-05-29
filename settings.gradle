@@ -18,5 +18,5 @@
 
 
 
-include ':OpenCamera', ':VideoPlayer_Library', ':VideoPlayer_Test', 'OpenCamcorder_Library', 'OpenCamcorder_Test'
+include ':VideoPlayer_Library', ':VideoPlayer_Test', 'OpenCamcorder_Library', 'OpenCamcorder_Test', 'OpenCamera_android2.3'
 
