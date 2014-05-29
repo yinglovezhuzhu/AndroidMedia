@@ -16,7 +16,15 @@
  * limitations under the License.
  */
 
+package com.opensource.opencamcorder;
 
+/**
+ * This class represents the condition that we cannot open the camera hardware
+ * successfully. For example, another process is using the camera.
+ */
+public class CameraHardwareException extends Exception {
 
-include ':OpenCamera', ':VideoPlayer_Library', ':VideoPlayer_Test', 'OpenCamcorder_Library', 'OpenCamcorder_Test'
-
+    public CameraHardwareException(Throwable t) {
+        super(t);
+    }
+}
