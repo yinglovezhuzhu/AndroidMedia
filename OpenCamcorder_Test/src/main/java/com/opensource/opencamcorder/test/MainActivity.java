@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.opensource.opencamcorder.VideoCamera;
+import com.opensource.opencamcorder.CamcorderActivity;
 
 public class MainActivity extends Activity {
 
@@ -17,7 +17,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.btn_video).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, VideoCamera.class);
+                Intent intent = new Intent(MainActivity.this, CamcorderActivity.class);
                 startActivity(intent);
             }
         });

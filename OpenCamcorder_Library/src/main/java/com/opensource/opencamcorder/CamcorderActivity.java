@@ -90,7 +90,7 @@ import java.util.List;
 //        ShutterButton.OnShutterButtonListener, SurfaceHolder.Callback,
 //        MediaRecorder.OnErrorListener, MediaRecorder.OnInfoListener,
 //        Switcher.OnSwitchListener, PreviewFrameLayout.OnSizeChangedListener {
-public class VideoCamera extends NoSearchActivity
+public class CamcorderActivity extends NoSearchActivity
         implements View.OnClickListener,
         SurfaceHolder.Callback, MediaRecorder.OnErrorListener,
         MediaRecorder.OnInfoListener,
@@ -241,7 +241,7 @@ public class VideoCamera extends NoSearchActivity
                 // SD card unavailable
                 // handled in ACTION_MEDIA_EJECT
             } else if (action.equals(Intent.ACTION_MEDIA_SCANNER_STARTED)) {
-                Toast.makeText(VideoCamera.this,
+                Toast.makeText(CamcorderActivity.this,
                         getResources().getString(R.string.wait), Toast.LENGTH_LONG);
             } else if (action.equals(Intent.ACTION_MEDIA_SCANNER_FINISHED)) {
                 updateAndShowStorageHint(true);
@@ -259,7 +259,7 @@ public class VideoCamera extends NoSearchActivity
 
     private void showCameraErrorAndFinish() {
         Resources ress = getResources();
-        Util.showFatalErrorAndFinish(VideoCamera.this,
+        Util.showFatalErrorAndFinish(CamcorderActivity.this,
                 ress.getString(R.string.camera_error_title),
                 ress.getString(R.string.cannot_connect_camera));
     }
@@ -378,7 +378,7 @@ public class VideoCamera extends NoSearchActivity
 //        mShutterButton.setOnShutterButtonListener(this);
 //        mShutterButton.requestFocus();
 
-        mOrientationListener = new MyOrientationEventListener(VideoCamera.this);
+        mOrientationListener = new MyOrientationEventListener(CamcorderActivity.this);
 
         // Make sure preview is started.
         try {
@@ -460,7 +460,7 @@ public class VideoCamera extends NoSearchActivity
             // When the screen is unlocked, display rotation may change. Always
             // calculate the up-to-date orientationCompensation.
             int orientationCompensation = mOrientation
-                    + Util.getDisplayRotation(VideoCamera.this);
+                    + Util.getDisplayRotation(CamcorderActivity.this);
             if (mOrientationCompensation != orientationCompensation) {
                 mOrientationCompensation = orientationCompensation;
                 if (!mIsVideoCaptureIntent) {
@@ -1205,7 +1205,7 @@ public class VideoCamera extends NoSearchActivity
             if (mMediaRecorderRecording) onStopVideoRecording(true);
 
             // Show the toast.
-            Toast.makeText(VideoCamera.this, R.string.video_reach_size_limit,
+            Toast.makeText(CamcorderActivity.this, R.string.video_reach_size_limit,
                            Toast.LENGTH_LONG).show();
         }
     }

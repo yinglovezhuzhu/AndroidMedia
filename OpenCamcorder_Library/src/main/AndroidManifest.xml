@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.opensource.openvideo">
+    package="com.opensource.opencamcorder">
 
-    <original-package android:name="com.opensource.openvideo" />
+    <original-package android:name="com.opensource.opencamcorder" />
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-feature android:name="android.hardware.camera" />
@@ -17,7 +17,7 @@
     <application android:allowBackup="true"
         android:label="@string/app_name"
         android:icon="@drawable/ic_launcher">
-        <activity android:name="com.opensource.opencamcorder.VideoCamera" />
+        <activity android:name="com.opensource.opencamcorder.CamcorderActivity" />
     </application>
 
 </manifest>

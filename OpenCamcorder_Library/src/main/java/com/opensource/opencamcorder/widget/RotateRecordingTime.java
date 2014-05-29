@@ -27,7 +27,6 @@ import android.widget.TextView;
 
 import com.opensource.opencamcorder.R;
 
-
 // This is a rectangle that contains recording text view. Canvas is rotated
 // before passing to recording text.
 public class RotateRecordingTime extends FrameLayout {
