@@ -1,3 +1,21 @@
+<!--
+  ~ Copyright (C) 2014 The Android Open Source Project.
+  ~
+  ~        yinglovezhuzhu@gmail.com
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
 <resources>
     <string name="app_name">OpenVideo_Library</string>
 
@@ -39,5 +57,22 @@
     <!--<string name="spaceIsLow_content" product="nosdcard">Your USB storage is running out of space. Change the quality setting or delete some images or other files.</string>-->
     <!-- Low-memory dialog message [CHAR LIMIT=NONE] -->
     <string name="spaceIsLow_content" product="default">Your SD card is running out of space. Change the quality setting or delete some images or other files.</string>
+
+    <!-- Default flash mode setting.-->
+    <!--<string name="pref_camera_flashmode_default" translatable="false">auto</string>-->
+
+    <!-- Value for flash off setting-->
+    <string name="camera_flashmode_no_flash" translatable="false">no_flash</string>
+
+    <!-- Settings screen, Flash mode title -->
+    <!--<string name="pref_camera_flashmode_title">Flash mode</string>-->
+
+    <!-- Settings screen, Flash mode dialog radio button choices -->
+    <!--<string name="pref_camera_flashmode_entry_auto">Auto</string>-->
+    <!--<string name="pref_camera_flashmode_entry_on">On</string>-->
+    <!--<string name="pref_camera_flashmode_entry_off">Off</string>-->
+
+    <!-- label for the 'video recording application shown in the top level 'all applications' -->
+    <string name="video_camera_label">Camcorder</string>
 
 </resources>

@@ -67,6 +67,7 @@ import android.widget.Toast;
 
 import com.opensource.opencamcorder.widget.GLRootView;
 import com.opensource.opencamcorder.widget.RotateRecordingTime;
+import com.opensource.opencamcorder.widget.ShutterButton;
 
 import java.io.File;
 import java.io.IOException;
@@ -75,28 +76,21 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-//import com.opensource.openvideo.widget.HeadUpDisplay;
-
-//import com.opensource.opencamera.gallery.IImage;
-//import com.opensource.opencamera.gallery.IImageList;
-//import com.opensource.opencamera.ui.CamcorderHeadUpDisplay;
-//import com.opensource.opencamera.ui.HeadUpDisplay;
-
 /**
  * The Camcorder activity.
  */
-//public class VideoCamera extends NoSearchActivity
+//public class CamcorderActivity extends NoSearchActivity
 //        implements View.OnClickListener,
 //        ShutterButton.OnShutterButtonListener, SurfaceHolder.Callback,
 //        MediaRecorder.OnErrorListener, MediaRecorder.OnInfoListener,
 //        Switcher.OnSwitchListener, PreviewFrameLayout.OnSizeChangedListener {
 public class CamcorderActivity extends NoSearchActivity
-        implements View.OnClickListener,
+        implements View.OnClickListener,ShutterButton.OnShutterButtonListener,
         SurfaceHolder.Callback, MediaRecorder.OnErrorListener,
         MediaRecorder.OnInfoListener,
         PreviewFrameLayout.OnSizeChangedListener {
 
-    private static final String TAG = "videocamera";
+    private static final String TAG = "CamcorderActivity";
 
     private static final int CLEAR_SCREEN_DELAY = 4;
     private static final int UPDATE_RECORD_TIME = 5;
@@ -173,7 +167,7 @@ public class CamcorderActivity extends NoSearchActivity
 
     private ContentResolver mContentResolver;
 
-//    private ShutterButton mShutterButton;
+    private ShutterButton mShutterButton;
     private RotateRecordingTime mRecordingTimeRect;
     private TextView mRecordingTimeView;
 //    private Switcher mSwitcher;
@@ -188,7 +182,7 @@ public class CamcorderActivity extends NoSearchActivity
     private int mNumberOfCameras;
     private int mCameraId = 0;
 
-    private MyOrientationEventListener mOrientationListener;
+    private MainOrientationEventListener mOrientationListener;
     // The device orientation in degrees. Default is unknown.
     private int mOrientation = OrientationEventListener.ORIENTATION_UNKNOWN;
     // The orientation compensation for icons and thumbnails. Degrees are in
@@ -203,8 +197,8 @@ public class CamcorderActivity extends NoSearchActivity
         public void handleMessage(Message msg) {
             switch (msg.what) {
 
-                case ENABLE_SHUTTER_BUTTON:
-//                    mShutterButton.setEnabled(true);
+                case ENABLE_SHUTTER_BUTTON: //Enable shutter button
+                    mShutterButton.setEnabled(true);
                     break;
 
                 case CLEAR_SCREEN_DELAY: {
@@ -236,7 +230,7 @@ public class CamcorderActivity extends NoSearchActivity
                 stopVideoRecording();
             } else if (action.equals(Intent.ACTION_MEDIA_MOUNTED)) {
                 updateAndShowStorageHint(true);
-                updateThumbnailButton();
+//                updateThumbnailButton();
             } else if (action.equals(Intent.ACTION_MEDIA_UNMOUNTED)) {
                 // SD card unavailable
                 // handled in ACTION_MEDIA_EJECT
@@ -291,12 +285,6 @@ public class CamcorderActivity extends NoSearchActivity
             win.setAttributes(winParams);
         }
 
-//        mPreferences = new ComboPreferences(this);
-//        CameraSettings.upgradeGlobalPreferences(mPreferences.getGlobal());
-//        mCameraId = CameraSettings.readPreferredCameraId(mPreferences);
-//        mPreferences.setLocalId(this, mCameraId);
-//        CameraSettings.upgradeLocalPreferences(mPreferences.getLocal());
-//
         mNumberOfCameras = CameraHolder.instance().getNumberOfCameras();
 
         readVideoPreferences();
@@ -325,12 +313,12 @@ public class CamcorderActivity extends NoSearchActivity
         mContentResolver = getContentResolver();
 
         requestWindowFeature(Window.FEATURE_PROGRESS);
-        setContentView(R.layout.video_camera);
+        setContentView(R.layout.activity_camcorder);
 
         mPreviewFrameLayout = (PreviewFrameLayout)
                 findViewById(R.id.frame_layout);
         mPreviewFrameLayout.setOnSizeChangedListener(this);
-//        resizeForPreviewAspectRatio();
+        resizeForPreviewAspectRatio();
 
         mVideoPreview = (SurfaceView) findViewById(R.id.camera_preview);
         mVideoFrame = (ImageView) findViewById(R.id.video_frame);
@@ -340,7 +328,12 @@ public class CamcorderActivity extends NoSearchActivity
         // assume that when it is set, the surface is also set.
         SurfaceHolder holder = mVideoPreview.getHolder();
         holder.addCallback(this);
-        holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+            //This constant was deprecated in API level 11.
+            //this is ignored, this value is set automatically when needed.
+            //so only when API level bellow 11 need to be set.
+            holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+        }
 
         mIsVideoCaptureIntent = isVideoCaptureIntent();
         mQuickCapture = getIntent().getBooleanExtra(EXTRA_QUICK_CAPTURE, false);
@@ -349,36 +342,14 @@ public class CamcorderActivity extends NoSearchActivity
 
         ViewGroup rootView = (ViewGroup) findViewById(R.id.video_camera);
         LayoutInflater inflater = this.getLayoutInflater();
-        if (!mIsVideoCaptureIntent) {
-//            View controlBar = inflater.inflate(
-//                    R.layout.camera_control, rootView);
-//            mLastPictureButton =
-//                    (ImageView) controlBar.findViewById(R.id.review_thumbnail);
-//            mThumbController = new ThumbnailController(
-//                    getResources(), mLastPictureButton, mContentResolver);
-//            mLastPictureButton.setOnClickListener(this);
-//            mThumbController.loadData(ImageManager.getLastVideoThumbPath());
-//            mSwitcher = ((Switcher) findViewById(R.id.camera_switch));
-//            mSwitcher.setOnSwitchListener(this);
-//            mSwitcher.addTouchView(findViewById(R.id.camera_switch_set));
-        } else {
-//            View controlBar = inflater.inflate(
-//                    R.layout.attach_camera_control, rootView);
-//            controlBar.findViewById(R.id.btn_cancel).setOnClickListener(this);
-//            ImageView retake =
-//                    (ImageView) controlBar.findViewById(R.id.btn_retake);
-//            retake.setOnClickListener(this);
-//            retake.setImageResource(R.drawable.btn_ic_review_retake_video);
-//            controlBar.findViewById(R.id.btn_play).setOnClickListener(this);
-//            controlBar.findViewById(R.id.btn_done).setOnClickListener(this);
-        }
+        View controlBar = inflater.inflate(R.layout.camcorder_control, rootView);
 
-//        mShutterButton = (ShutterButton) findViewById(R.id.shutter_button);
-//        mShutterButton.setImageResource(R.drawable.btn_ic_video_record);
-//        mShutterButton.setOnShutterButtonListener(this);
-//        mShutterButton.requestFocus();
+        mShutterButton = (ShutterButton) findViewById(R.id.shutter_button);
+        mShutterButton.setImageResource(R.drawable.btn_ic_video_record);
+        mShutterButton.setOnShutterButtonListener(this);
+        mShutterButton.requestFocus();
 
-        mOrientationListener = new MyOrientationEventListener(CamcorderActivity.this);
+        mOrientationListener = new MainOrientationEventListener(CamcorderActivity.this);
 
         // Make sure preview is started.
         try {
@@ -389,27 +360,6 @@ public class CamcorderActivity extends NoSearchActivity
             }
         } catch (InterruptedException ex) {
             // ignore
-        }
-
-        // Initialize the HeadUpDiplay after startPreview(). We need mParameters
-        // for HeadUpDisplay and it is initialized in that function.
-//        mHeadUpDisplay = new CamcorderHeadUpDisplay(this);
-//        mHeadUpDisplay.setListener(new MyHeadUpDisplayListener());
-//        initializeHeadUpDisplay();
-    }
-
-    private void changeHeadUpDisplayState() {
-        // If the camera resumes behind the lock screen, the orientation
-        // will be portrait. That causes OOM when we try to allocation GPU
-        // memory for the GLSurfaceView again when the orientation changes. So,
-        // we delayed initialization of HeadUpDisplay until the orientation
-        // becomes landscape.
-        Configuration config = getResources().getConfiguration();
-        if (config.orientation == Configuration.ORIENTATION_LANDSCAPE
-                && !mPausing && mGLRootView == null) {
-//            attachHeadUpDisplay();
-        } else if (mGLRootView != null) {
-//            detachHeadUpDisplay();
         }
     }
 
@@ -443,9 +393,9 @@ public class CamcorderActivity extends NoSearchActivity
         return ((orientation + 45) / 90 * 90) % 360;
     }
 
-    private class MyOrientationEventListener
+    private class MainOrientationEventListener
             extends OrientationEventListener {
-        public MyOrientationEventListener(Context context) {
+        public MainOrientationEventListener(Context context) {
             super(context);
         }
 
@@ -518,9 +468,39 @@ public class CamcorderActivity extends NoSearchActivity
         }
     }
 
-//    public void onShutterButtonFocus(ShutterButton button, boolean pressed) {
-//        // Do nothing (everything happens in onShutterButtonClick).
-//    }
+
+    @Override
+    public void onShutterButtonFocus(ShutterButton b, boolean pressed) {
+        // Do nothing (everything happens in onShutterButtonClick).
+    }
+
+    @Override
+    public void onShutterButtonClick(ShutterButton b) {
+        if(b == mShutterButton) {
+            if (mMediaRecorderRecording) {
+                onStopVideoRecording(true);
+            } else {
+                startVideoRecording();
+            }
+            mShutterButton.setEnabled(false);
+            mHandler.sendEmptyMessageDelayed(
+                    ENABLE_SHUTTER_BUTTON, SHUTTER_BUTTON_TIMEOUT);
+        }
+//        switch (b.getId()) {
+//            case R.id.shutter_button:
+////                if (mHeadUpDisplay.collapse()) return;
+//
+//                if (mMediaRecorderRecording) {
+//                    onStopVideoRecording(true);
+//                } else {
+//                    startVideoRecording();
+//                }
+//                mShutterButton.setEnabled(false);
+//                mHandler.sendEmptyMessageDelayed(
+//                        ENABLE_SHUTTER_BUTTON, SHUTTER_BUTTON_TIMEOUT);
+//                break;
+//        }
+    }
 
     private void onStopVideoRecording(boolean valid) {
         if (mIsVideoCaptureIntent) {
@@ -534,22 +514,6 @@ public class CamcorderActivity extends NoSearchActivity
         }
     }
 
-//    public void onShutterButtonClick(ShutterButton button) {
-//        switch (button.getId()) {
-//            case R.id.shutter_button:
-//                if (mHeadUpDisplay.collapse()) return;
-//
-//                if (mMediaRecorderRecording) {
-//                    onStopVideoRecording(true);
-//                } else {
-//                    startVideoRecording();
-//                }
-//                mShutterButton.setEnabled(false);
-//                mHandler.sendEmptyMessageDelayed(
-//                        ENABLE_SHUTTER_BUTTON, SHUTTER_BUTTON_TIMEOUT);
-//                break;
-//        }
-//    }
 
 //    private OnScreenHint mStorageHint;
 
@@ -628,10 +592,10 @@ public class CamcorderActivity extends NoSearchActivity
         mProfile = CamcorderProfile.get(mCameraId, CamcorderProfile.QUALITY_HIGH);
     }
 
-//    private void resizeForPreviewAspectRatio() {
-//        mPreviewFrameLayout.setAspectRatio(
-//                (double) mProfile.videoFrameWidth / mProfile.videoFrameHeight);
-//    }
+    private void resizeForPreviewAspectRatio() {
+        mPreviewFrameLayout.setAspectRatio(
+                (double) mProfile.videoFrameWidth / mProfile.videoFrameHeight);
+    }
 
     @Override
     protected void onResume() {
@@ -642,8 +606,8 @@ public class CamcorderActivity extends NoSearchActivity
         // some time to get first orientation.
         mOrientationListener.enable();
         mVideoPreview.setVisibility(View.VISIBLE);
-        readVideoPreferences();
-//        resizeForPreviewAspectRatio();
+//        readVideoPreferences();
+        resizeForPreviewAspectRatio();
         if (!mPreviewing && !mStartPreviewFail) {
             if (!restartPreview()) return;
         }
@@ -667,9 +631,7 @@ public class CamcorderActivity extends NoSearchActivity
             }
         }, 200);
 
-        changeHeadUpDisplayState();
-
-        updateThumbnailButton();
+//        updateThumbnailButton();
     }
 
     private void setPreviewDisplay(SurfaceHolder holder) {
@@ -724,8 +686,6 @@ public class CamcorderActivity extends NoSearchActivity
         super.onPause();
         mPausing = true;
 
-        changeHeadUpDisplayState();
-
         // Hide the preview now. Otherwise, the preview may be rotated during
         // onPause and it is annoying to users.
         mVideoPreview.setVisibility(View.INVISIBLE);
@@ -770,13 +730,14 @@ public class CamcorderActivity extends NoSearchActivity
 
     @Override
     public void onBackPressed() {
-        if (mPausing) return;
+        if (mPausing) {
+            return;
+        }
         if (mMediaRecorderRecording) {
             onStopVideoRecording(false);
+        } else {
+            super.onBackPressed();
         }
-//        else if (mHeadUpDisplay == null || !mHeadUpDisplay.collapse()) {
-//            super.onBackPressed();
-//        }
     }
 
     @Override
@@ -789,13 +750,13 @@ public class CamcorderActivity extends NoSearchActivity
         switch (keyCode) {
             case KeyEvent.KEYCODE_CAMERA:
                 if (event.getRepeatCount() == 0) {
-//                    mShutterButton.performClick();
+                    mShutterButton.performClick();
                     return true;
                 }
                 break;
             case KeyEvent.KEYCODE_DPAD_CENTER:
                 if (event.getRepeatCount() == 0) {
-//                    mShutterButton.performClick();
+                    mShutterButton.performClick();
                     return true;
                 }
                 break;
@@ -814,7 +775,7 @@ public class CamcorderActivity extends NoSearchActivity
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         switch (keyCode) {
             case KeyEvent.KEYCODE_CAMERA:
-//                mShutterButton.setPressed(false);
+                mShutterButton.setPressed(false);
                 return true;
         }
         return super.onKeyUp(keyCode, event);
@@ -842,7 +803,9 @@ public class CamcorderActivity extends NoSearchActivity
         // The mCameraDevice will be null if it is fail to connect to the
         // camera hardware. In this case we will show a dialog and then
         // finish the activity, so it's OK to ignore it.
-        if (mCameraDevice == null) return;
+        if (mCameraDevice == null) {
+            return;
+        }
 
         // Set preview display if the surface is being created. Preview was
         // already started.
@@ -861,9 +824,9 @@ public class CamcorderActivity extends NoSearchActivity
         mSurfaceHolder = null;
     }
 
-    private void gotoGallery() {
-//        MenuHelper.gotoCameraVideoGallery(this);
-    }
+    /*private void gotoGallery() {
+        MenuHelper.gotoCameraVideoGallery(this);
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -970,7 +933,7 @@ public class CamcorderActivity extends NoSearchActivity
         mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
         mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
         mMediaRecorder.setProfile(mProfile);
-        mMediaRecorder.setMaxDuration(mMaxVideoDurationInMs);
+//        mMediaRecorder.setMaxDuration(mMaxVideoDurationInMs);
 
         // Set output file.
         if (mStorageStatus != STORAGE_STATUS_OK) {
@@ -1165,7 +1128,7 @@ public class CamcorderActivity extends NoSearchActivity
 //        CameraSettings.upgradeLocalPreferences(mPreferences.getLocal());
         // Read media profile again because camera id is changed.
         readVideoPreferences();
-//        resizeForPreviewAspectRatio();
+        resizeForPreviewAspectRatio();
         restartPreview();
 
         // Reload the UI.
@@ -1263,7 +1226,7 @@ public class CamcorderActivity extends NoSearchActivity
                 showRecording ? R.drawable.btn_ic_video_record
                         : R.drawable.btn_ic_video_record_stop;
         Drawable drawable = getResources().getDrawable(drawableId);
-//        mShutterButton.setImageDrawable(drawable);
+        mShutterButton.setImageDrawable(drawable);
     }
 
     private void stopVideoRecordingAndGetThumbnail() {
@@ -1408,15 +1371,15 @@ public class CamcorderActivity extends NoSearchActivity
         return ImageManager.DataLocation.EXTERNAL;
     }
 
-    private void updateThumbnailButton() {
-        // Update the last video thumbnail.
-        if (!mIsVideoCaptureIntent) {
+//    private void updateThumbnailButton() {
+//        // Update the last video thumbnail.
+//        if (!mIsVideoCaptureIntent) {
 //            if (!mThumbController.isUriValid()) {
 //                updateLastVideo();
 //            }
 //            mThumbController.updateDisplayIfNeeded();
-        }
-    }
+//        }
+//    }
 
     private void updateLastVideo() {
 //        IImageList list = ImageManager.makeImageList(
@@ -1437,7 +1400,7 @@ public class CamcorderActivity extends NoSearchActivity
     }
 
     /**
-     * Update the time show in record view.
+     * Update the time show in when recording.
      */
     private void updateRecordingTime() {
         if (!mMediaRecorderRecording) {
@@ -1522,16 +1485,18 @@ public class CamcorderActivity extends NoSearchActivity
 //        String flashMode = mPreferences.getString(
 //                CameraSettings.KEY_VIDEOCAMERA_FLASH_MODE,
 //                getString(R.string.pref_camera_video_flashmode_default));
-//        List<String> supportedFlash = mParameters.getSupportedFlashModes();
-//        if (isSupported(flashMode, supportedFlash)) {
-//            mParameters.setFlashMode(flashMode);
-//        } else {
-//            flashMode = mParameters.getFlashMode();
-//            if (flashMode == null) {
-//                flashMode = getString(
-//                        R.string.pref_camera_flashmode_no_flash);
-//            }
-//        }
+        List<String> supportedFlash = mParameters.getSupportedFlashModes();
+        //FIXME make flash mode can be set.
+        String flashMode = Parameters.FLASH_MODE_OFF;
+        if (isSupported(flashMode, supportedFlash)) {
+            mParameters.setFlashMode(flashMode);
+        } else {
+            flashMode = mParameters.getFlashMode();
+            if (flashMode == null) {
+                flashMode = getString(
+                        R.string.camera_flashmode_no_flash);
+            }
+        }
 
         // Set white balance parameter.
 //        String whiteBalance = mPreferences.getString(
@@ -1560,21 +1525,6 @@ public class CamcorderActivity extends NoSearchActivity
         mParameters = mCameraDevice.getParameters();
     }
 
-    /*private boolean switchToCameraMode() {
-        if (isFinishing() || mMediaRecorderRecording) return false;
-        MenuHelper.gotoCameraMode(this);
-        finish();
-        return true;
-    }*/
-
-    /*public boolean onSwitchChanged(Switcher source, boolean onOff) {
-        if (onOff == SWITCH_CAMERA) {
-            return switchToCameraMode();
-        } else {
-            return true;
-        }
-    }*/
-
     @Override
     public void onConfigurationChanged(Configuration config) {
         super.onConfigurationChanged(config);
@@ -1584,7 +1534,7 @@ public class CamcorderActivity extends NoSearchActivity
         // memory for the GLSurfaceView again when the orientation changes. So,
         // we delayed initialization of HeadUpDisplay until the orientation
         // becomes landscape.
-        changeHeadUpDisplayState();
+//        changeHeadUpDisplayState();
     }
 
     private void resetCameraParameters() {
@@ -1595,67 +1545,15 @@ public class CamcorderActivity extends NoSearchActivity
             // It is assumed media recorder is released before
             // onSharedPreferenceChanged, so we can close the camera here.
             closeCamera();
-//            resizeForPreviewAspectRatio();
+            resizeForPreviewAspectRatio();
             restartPreview(); // Parameters will be set in startPreview().
         } else {
             setCameraParameters();
         }
     }
 
+    @Override
     public void onSizeChanged() {
         // TODO: update the content on GLRootView
     }
-
-    /*private class MyHeadUpDisplayListener implements HeadUpDisplay.Listener {
-        public void onSharedPreferencesChanged() {
-            mHandler.post(new Runnable() {
-                public void run() {
-//                    VideoCamera.this.onSharedPreferencesChanged();
-                }
-            });
-        }
-
-        public void onRestorePreferencesClicked() {
-            mHandler.post(new Runnable() {
-                public void run() {
-//                    VideoCamera.this.onRestorePreferencesClicked();
-                }
-            });
-        }
-
-        public void onPopupWindowVisibilityChanged(final int visibility) {
-        }
-    }*/
-
-    //Reset setting
-    /*private void onRestorePreferencesClicked() {
-        Runnable runnable = new Runnable() {
-            public void run() {
-                mHeadUpDisplay.restorePreferences(mParameters);
-            }
-        };
-        MenuHelper.confirmAction(this,
-                getString(R.string.confirm_restore_title),
-                getString(R.string.confirm_restore_message),
-                runnable);
-    }*/
-
-    /*private void onSharedPreferencesChanged() {
-        // ignore the events after "onPause()" or preview has not started yet
-        if (mPausing) return;
-        synchronized (mPreferences) {
-            readVideoPreferences();
-            // If mCameraDevice is not ready then we can set the parameter in
-            // startPreview().
-            if (mCameraDevice == null) return;
-
-            // Check if camera id is changed.
-            int cameraId = CameraSettings.readPreferredCameraId(mPreferences);
-            if (mCameraId != cameraId) {
-                switchCameraId(cameraId);
-            } else {
-                resetCameraParameters();
-            }
-        }
-    }*/
 }
