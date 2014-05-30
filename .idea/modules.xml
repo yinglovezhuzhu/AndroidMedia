@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AndroidMedia.iml" filepath="$PROJECT_DIR$/AndroidMedia.iml" />
-      <module fileurl="file://$PROJECT_DIR$/MagicCamcorder_Library/MagicCamcorder_Library.iml" filepath="$PROJECT_DIR$/MagicCamcorder_Library/MagicCamcorder_Library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MagicCamcorder/MagicCamcorder.iml" filepath="$PROJECT_DIR$/MagicCamcorder/MagicCamcorder.iml" />
       <module fileurl="file://$PROJECT_DIR$/OpenCamcorder_Library/OpenCamcorder_Library.iml" filepath="$PROJECT_DIR$/OpenCamcorder_Library/OpenCamcorder_Library.iml" />
       <module fileurl="file://$PROJECT_DIR$/OpenCamcorder_Test/OpenCamcorder_Test.iml" filepath="$PROJECT_DIR$/OpenCamcorder_Test/OpenCamcorder_Test.iml" />
       <module fileurl="file://$PROJECT_DIR$/OpenCamera_android2.3/OpenCamera_android2.3.iml" filepath="$PROJECT_DIR$/OpenCamera_android2.3/OpenCamera_android2.3.iml" />

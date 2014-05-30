@@ -66,6 +66,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.opensource.opencamcorder.widget.GLRootView;
+import com.opensource.opencamcorder.widget.PreviewFrameLayout;
 import com.opensource.opencamcorder.widget.RotateRecordingTime;
 import com.opensource.opencamcorder.widget.ShutterButton;
 

@@ -21,5 +21,12 @@ public class MainActivity extends Activity {
                 startActivity(intent);
             }
         });
+
+        findViewById(R.id.btn_magic_video).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 }

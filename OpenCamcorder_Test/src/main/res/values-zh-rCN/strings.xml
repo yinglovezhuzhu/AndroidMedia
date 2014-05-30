@@ -20,6 +20,7 @@
 <resources>
 
     <string name="app_name">摄像机</string>
-    <string name="video">录像</string>
+    <string name="video">录像机</string>
+    <string name="magic_video">魔法录像机</string>
 
 </resources>

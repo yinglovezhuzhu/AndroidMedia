@@ -8,7 +8,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/MagicCamcorder_Library" />
+            <option value="$PROJECT_DIR$/MagicCamcorder" />
             <option value="$PROJECT_DIR$/OpenCamcorder_Library" />
             <option value="$PROJECT_DIR$/OpenCamcorder_Test" />
             <option value="$PROJECT_DIR$/OpenCamera_android2.3" />

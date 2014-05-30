@@ -23,7 +23,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
-    <com.opensource.opencamcorder.PreviewFrameLayout
+    <com.opensource.opencamcorder.widget.PreviewFrameLayout
         android:id="@+id/frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -93,5 +93,5 @@
                     android:src="@drawable/ic_switch_video_camera"/>
             </LinearLayout>
         </FrameLayout>
-    </com.opensource.opencamcorder.PreviewFrameLayout>
+    </com.opensource.opencamcorder.widget.PreviewFrameLayout>
 </LinearLayout>

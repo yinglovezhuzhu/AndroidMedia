@@ -22,16 +22,18 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.hardware.Camera;
+import android.util.Log;
 import android.view.Surface;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 
-import java.io.Closeable;
+import com.opensource.opencamcorder.gallery.IImage;
 
-//import com.opensource.opencamera.gallery.IImage;
+import java.io.Closeable;
 
 /**
  * Collection of utility functions used in this package.
@@ -106,7 +108,7 @@ public class Util {
      * For example, BitmapFactory downsamples an image by 2 even though the
      * request is 3. So we round up the sample size to avoid OOM.
      */
-    /*public static int computeSampleSize(BitmapFactory.Options options,
+    public static int computeSampleSize(BitmapFactory.Options options,
             int minSideLength, int maxNumOfPixels) {
         int initialSize = computeInitialSampleSize(options, minSideLength,
                 maxNumOfPixels);
@@ -157,7 +159,7 @@ public class Util {
             }
         }
         return -1;
-    }*/
+    }
 
     public static void closeSilently(Closeable c) {
         if (c == null) return;
@@ -168,7 +170,7 @@ public class Util {
         }
     }
 
-    /*public static Bitmap makeBitmap(byte[] jpegData, int maxNumOfPixels) {
+    public static Bitmap makeBitmap(byte[] jpegData, int maxNumOfPixels) {
         try {
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inJustDecodeBounds = true;
@@ -190,7 +192,7 @@ public class Util {
             Log.e(TAG, "Got oom exception ", ex);
             return null;
         }
-    }*/
+    }
 
     public static void Assert(boolean cond) {
         if (!cond) {
