@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="ffmpeg-2.2.1-0.8">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/MagicCamcorder/libs/ffmpeg-2.2.1-0.8.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

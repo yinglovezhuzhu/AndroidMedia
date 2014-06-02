@@ -112,6 +112,28 @@ public class CameraHolder {
         return mInfo;
     }
 
+//    public void startPreView(SurfaceHolder holder) {
+//        if(mCameraDevice != null) {
+//            try {
+//                mCameraDevice.setPreviewDisplay(holder);
+//                mCameraDevice.startPreview();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
+//
+//    public void stopPreView() {
+//        if(mCameraDevice != null) {
+//            try {
+//                mCameraDevice.stopPreview();
+//                mCameraDevice.setPreviewDisplay(null);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
+
     public synchronized android.hardware.Camera open(int cameraId)
             throws CameraHardwareException {
         Assert(mUsers == 0);
