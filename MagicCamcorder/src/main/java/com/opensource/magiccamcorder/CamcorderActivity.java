@@ -734,6 +734,7 @@ public class CamcorderActivity extends Activity
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
 
+        initRecorder();
     }
 
     @Override
