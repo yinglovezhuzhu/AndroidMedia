@@ -130,7 +130,7 @@ public class FFmpegPreviewActivity extends Activity implements TextureView.Surfa
 
     private void stop() {
         mediaPlayer.stop();
-        Intent intent = new Intent(this, FFmpegPreviewActivity.class);
+        Intent intent = new Intent(this, FFmpegRecorderActivity.class);
         startActivity(intent);
         finish();
     }
