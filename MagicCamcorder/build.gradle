@@ -27,8 +27,6 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:19.+'
-    compile files('libs/ffmpeg-2.2.1-0.8.jar')
-    compile files('libs/javacpp-0.8.jar')
-    compile files('libs/javacv-0.8.jar')
-    compile files('libs/opencv-2.4.9-0.8.jar')
+    compile files('libs/javacpp.jar')
+    compile files('libs/javacv.jar')
 }

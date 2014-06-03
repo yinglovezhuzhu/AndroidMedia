@@ -1,5 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" />
+  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/MagicCamcorder" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/MagicCamcorder/libs/javacpp.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/MagicCamcorder/libs/javacv.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/MagicCamcorder/src/main/AndroidManifest.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/MagicCamcorder/src/main/java/com/opensource/magiccamcorder/CONSTANTS.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/MagicCamcorder/src/main/java/com/opensource/magiccamcorder/FFmpegFrameRecorder.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/MagicCamcorder/src/main/java/com/opensource/magiccamcorder/FFmpegFrameRecorder.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/MagicCamcorder/src/main/java/com/opensource/magiccamcorder/FFmpegPreviewActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/MagicCamcorder/src/main/java/com/opensource/magiccamcorder/FFmpegRecorderActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/MagicCamcorder/src/main/java/com/opensource/magiccamcorder/ProgressView.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/MagicCamcorder/src/main/java/com/opensource/magiccamcorder/RecorderParameters.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/MagicCamcorder/src/main/java/com/opensource/magiccamcorder/SavedFrames.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/MagicCamcorder/src/main/java/com/opensource/magiccamcorder/Util.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/MagicCamcorder/src/main/java/com/opensource/magiccamcorder/VideoPlayTextureView.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/MagicCamcorder/src/main/jniLibs/armeabi" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/MagicCamcorder/src/main/res/AndroidManifest.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/MagicCamcorder/src/main/res/drawable" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/MagicCamcorder/src/main/res/drawable-hdpi" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/MagicCamcorder/src/main/res/drawable-mdpi" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/MagicCamcorder/src/main/res/drawable-xhdpi" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/MagicCamcorder/src/main/res/drawable-xxhdpi" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/MagicCamcorder/src/main/res/layout" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/MagicCamcorder/src/main/res/values" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/MagicCamcorder/src/main/res/values-v11" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/MagicCamcorder/src/main/res/values-v14" charset="GBK" />
+  </component>
 </project>
 
