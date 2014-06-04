@@ -17,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 
-import com.qd.videorecorder.R;
 
 public class FFmpegPreviewActivity extends Activity implements TextureView.SurfaceTextureListener
         , OnClickListener, OnCompletionListener {

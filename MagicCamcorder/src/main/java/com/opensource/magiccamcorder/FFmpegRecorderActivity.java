@@ -48,7 +48,6 @@ import android.widget.TextView;
 
 import com.googlecode.javacv.FrameRecorder;
 import com.googlecode.javacv.cpp.opencv_core.IplImage;
-import com.qd.videorecorder.R;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

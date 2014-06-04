@@ -25,7 +25,6 @@ import android.widget.Toast;
 
 import com.googlecode.javacv.cpp.opencv_core.IplImage;
 import com.googlecode.javacv.cpp.opencv_highgui.CvCapture;
-import com.qd.videorecorder.R;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
